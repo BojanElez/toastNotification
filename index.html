@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toast Notification</title>
+</head>
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        min-height: 100vh;
+    }
+
+    button {
+        background-color: rebeccapurple;
+        color: white;
+        font-family: inherit;
+        padding: 1rem;
+        border-radius: 5px;
+        border: none;
+    }
+
+    #container {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .toast {
+        background-color: rebeccapurple;
+        border-radius: 5px;
+        color: #fff;
+        padding: .4rem 2rem;
+        margin: 1rem;
+        position: relative;
+    }
+
+    .close::before {
+        content: 'x';
+        color: #fff;
+        font-weight: 300;
+        font-family: Arial, sans-serif;
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-52%);
+    }
+</style>
+
+<body>
+    <div id="container"></div>
+    <button id="btn">Click Me Pretty Please</button>
+    <script>
+        const btn = document.getElementById("btn");
+        const container = document.getElementById("container");
+        btn.addEventListener("click", createNotification);
+
+        function createNotification() {
+            let notify = document.createElement("div");
+            let close = document.createElement("div")
+            notify.classList.add("toast")
+            notify.innerHTML = "test test test";
+            close.classList.add("close");
+            close.setAttribute("onclick", "closeB(this)");
+            notify.appendChild(close);
+            container.appendChild(notify);
+            setTimeout(function () { container.removeChild(notify) }, 7000);
+        }
+        function closeB(element) {
+            element.parentElement.remove();
+        }
+    </script>
+</body>
+
+</html>
